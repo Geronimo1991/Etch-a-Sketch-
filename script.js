@@ -26,6 +26,14 @@ function generateBlocks(number) {
 
 		container.appendChild(div);
 	}
+
+	const blocks = document.querySelectorAll(".block");
+
+	blocks.forEach((block) => {
+		block.addEventListener("mouseenter", () => {
+			block.classList.add("block-color");
+		});
+	});
 }
 
-generateBlocks(80);
+generateBlocks(40);
