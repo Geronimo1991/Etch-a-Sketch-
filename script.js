@@ -1,3 +1,18 @@
+const btn = document.querySelector("button");
+btn.addEventListener("click", showPrompt);
+
+function showPrompt(message) {
+	const userInput = prompt("How many squares you want to have?");
+	if (userInput > 100 || isNaN(userInput)) {
+		showPrompt();
+	} else {
+		const blocks = document.querySelectorAll(".block");
+
+		blocks.forEach((block) => block.parentNode.removeChild(block));
+		generateBlocks(userInput);
+	}
+}
+
 function generateBlocks(number) {
 	const blockBorderSize = 1;
 	const blockSize = 14;
@@ -35,5 +50,3 @@ function generateBlocks(number) {
 		});
 	});
 }
-
-generateBlocks(40);
