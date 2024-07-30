@@ -4,10 +4,6 @@
 	flex-wrap: wrap;
 }
 
-.block-color {
-	background-color: blueviolet;
-}
-
 .newGrid {
 	position: relative;
 	top: 50%;

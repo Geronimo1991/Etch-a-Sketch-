@@ -14,11 +14,11 @@ function showPrompt(message) {
 }
 
 function generateBlocks(number) {
+	const containerSize = 1000;
 	const blockBorderSize = 1;
-	const blockSize = 14;
+	const blockSize = containerSize / number - 2 * blockBorderSize;
 
 	const container = document.querySelector(".container");
-	const containerSize = number * (blockSize + blockBorderSize * 2);
 
 	container.setAttribute(
 		"style",
@@ -28,16 +28,10 @@ function generateBlocks(number) {
 	for (i = 0; i < number * number; i++) {
 		let div = document.createElement("div");
 		div.classList.add("block");
-		div.setAttribute(
-			"style",
-			"width: " +
-				blockSize +
-				"px; height: " +
-				blockSize +
-				"px; border: " +
-				blockBorderSize +
-				"px solid black"
-		);
+
+		div.style.width = blockSize + "px";
+		div.style.height = blockSize + "px";
+		div.style.border = blockBorderSize + "px solid black";
 
 		container.appendChild(div);
 	}
@@ -46,7 +40,21 @@ function generateBlocks(number) {
 
 	blocks.forEach((block) => {
 		block.addEventListener("mouseenter", () => {
-			block.classList.add("block-color");
+			block.style.backgroundColor = generateBlockColor();
+			darkenBlock(block);
 		});
 	});
+}
+
+function generateBlockColor() {
+	const red = 255 * Math.random();
+	const green = 255 * Math.random();
+	const blue = 255 * Math.random();
+	return "rgb(" + red + "," + green + "," + blue + ")";
+}
+
+function darkenBlock(block) {
+	if (block.style.opacity < 1) {
+		return (block.style.opacity = +block.style.opacity + 0.1);
+	}
 }
